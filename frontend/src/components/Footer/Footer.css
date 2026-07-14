@@ -1,0 +1,44 @@
+.global-footer {
+  background: #002244;
+  color: white;
+  padding: 3rem 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.footer-brand h4 {
+  color: #f97316;
+  font-style: italic;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+.footer-brand p {
+  color: #aaa;
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-contact p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-icon {
+  color: #f97316;
+  font-size: 16px;
+}
+
+.footer-copyright {
+  font-size: 14px;
+  color: #888;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,192 @@
+/* =========================================
+   LAYOUT UTAMA STATISTIK
+   ========================================= */
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FAF9F6;
+  background-image: radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
+                    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
+  display: flex;
+  flex-direction: column;
+}
+
+.statistik-main {
+  flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 5%;
+  width: 100%;
+}
+
+.statistik-header {
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.statistik-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #002244;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.statistik-subtitle {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+}
+
+/* =========================================
+   KARTU DIAGRAM (DI TENGAH)
+   ========================================= */
+.chart-center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  width: 100%;
+  max-width: 600px; /* Membatasi lebar chart agar cantik di tengah */
+}
+
+.chart-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #003366;
+  margin: 0 0 2rem 0;
+  font-weight: 500;
+}
+
+/* =========================================
+   DESAIN CUSTOM BAR CHART
+   ========================================= */
+.bar-chart-container {
+  display: flex;
+  height: 250px;
+  position: relative;
+  gap: 1rem;
+}
+
+/* Sumbu Y (Angka Kiri) */
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 25px; /* Menyesuaikan jarak label X */
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  width: 20px;
+}
+
+/* Area Batang */
+.chart-area {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  position: relative;
+  padding-bottom: 25px; /* Ruang untuk teks tahun 2024 & 2025 */
+  border-bottom: 1px solid #ddd;
+}
+
+.bar-column {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Efek background abu-abu di belakang saat hover (seperti gambar) */
+.bar-hover-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f4f9;
+  border-radius: 8px 8px 0 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+
+.bar-column:hover .bar-hover-bg {
+  opacity: 1;
+}
+
+/* Warna Batang Chart Utama */
+.bar-fill {
+  width: 100%;
+  background-color: #1764A5; /* Biru khas BPS sesuai gambar */
+  border-radius: 8px 8px 0 0; /* Ujung atas membulat */
+  position: relative;
+  z-index: 2;
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Label Tahun (X-Axis) */
+.x-label {
+  position: absolute;
+  bottom: -25px;
+  text-align: center;
+  width: 100%;
+  font-size: 15px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* =========================================
+   TOOLTIP MELAYANG (FOLLOW CURSOR)
+   ========================================= */
+.custom-tooltip {
+  position: fixed;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  pointer-events: none; /* Agar tooltip tidak menutupi sensor mouse */
+  z-index: 9999;
+  transform: translate(15px, -50%); /* Sedikit digeser dari ujung kursor */
+}
+
+.tooltip-year {
+  font-size: 16px;
+  color: #002244;
+  margin-bottom: 6px;
+}
+
+.tooltip-count {
+  font-size: 15px;
+  color: #1764A5;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (HP & Tablet)
+   ========================================= */
+@media (max-width: 768px) {
+  .statistik-title {
+    font-size: 2.2rem;
+  }
+  
+  .chart-card {
+    padding: 1.5rem;
+  }
+
+  .bar-chart-container {
+    height: 200px;
+  }
+}

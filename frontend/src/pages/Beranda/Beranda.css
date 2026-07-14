@@ -1,0 +1,550 @@
+/* =========================================
+   RESET & SCROLLBAR
+   ========================================= */
+
+:root,
+body {
+  font-family: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+  background-color: #FAF9F6;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+  background-color: #FAF9F6;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw; /* Pastikan maksimal lebar hanya seukuran layar */
+  overflow-x: hidden; /* Matikan paksa pergerakan geser ke kanan/kiri */
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+.beranda-container {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden; /* Pengaman tambahan untuk container utama */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.beranda-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* =========================================
+   HERO SECTION & BACKGROUND (PENUMPUKAN)
+   ========================================= */
+
+/* 1. Pembungkus Utama (Gambar) */
+.hero-wrapper {
+  width: 100%;
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Agar gambar memenuhi ruang kanan */
+  position: relative;
+  /* Wajib agar elemen overlay bisa diatur */
+}
+
+/* 2. Overlay Gradasi */
+.hero-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Gradasi miring persis seperti referensi image_1b747f.jpg */
+  background: linear-gradient(
+    110deg,
+    #FAF9F6 0%,
+    #FAF9F6 45%,
+    /* Warna solid menutupi seluruh teks kiri */
+    rgba(250, 249, 246, 0.85) 55%,
+    rgba(250, 249, 246, 0) 75%
+    /* Transparan penuh di area foto kanan */
+  );
+
+  z-index: 1;
+  /* Di atas gambar */
+  pointer-events: none;
+  /* Mencegah gradasi menghalangi klik ke tombol */
+}
+
+/* 3. Konten Teks dan Kartu */
+.hero-section {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem;
+  padding: 6rem 5% 7rem 5%;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  /* Selalu di atas gradasi */
+}
+
+.hero-subtitle {
+  color: #c2883a;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: #003366;
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+    font-weight: 500;
+}
+
+.hero-title span {
+  color: #c2883a;
+  font-style: italic;
+}
+
+.hero-desc {
+  color: #666;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  font-size: 15px;
+  max-width: 90%;
+}
+
+/* =========================================
+   TOMBOL UTAMA (JELAJAHI PRESTASI)
+   ========================================= */
+
+.btn-primary {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
+  transition: all 0.3s ease;
+  
+  /* TAMBAHKAN BARIS INI */
+  text-decoration: none; 
+}
+
+.btn-primary .btn-icon {
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #002244;
+  box-shadow: 0 12px 25px rgba(0, 51, 102, 0.3);
+  transform: translateY(-3px);
+}
+
+.btn-primary:hover .btn-icon {
+  transform: translateX(6px);
+}
+
+/* =========================================
+   STATISTIK & PENCARIAN
+   ========================================= */
+
+.hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stats-card {
+  background: #fff;
+  padding: 2rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  flex: 1;
+}
+
+.stat-item:not(:last-child) {
+  border-right: 1px solid #eaeaea;
+  margin-right: 1.5rem;
+}
+
+.stat-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.bg-blue {
+  background: #003366;
+}
+
+.bg-green {
+  background: #5a9e6b;
+}
+
+.bg-orange {
+  background: #f28c28;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #003366;
+  margin: 0;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #666;
+  margin: 4px 0 0 0;
+  line-height: 1.3;
+}
+
+.search-bar-container {
+  width: 100%;
+}
+
+.search-bar {
+  display: flex;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 20px 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #333;
+  font-size: 15px;
+}
+
+.search-bar input::placeholder {
+  color: #999;
+}
+
+.search-bar .btn-search {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 0 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.search-bar .btn-search:hover {
+  background: #002244;
+}
+
+/* =========================================
+   PRESTASI TERBARU
+   ========================================= */
+
+.prestasi-section {
+  padding: 3rem 5% 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.prestasi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.5rem;
+}
+
+.prestasi-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.line-accent {
+  width: 30px;
+  height: 2px;
+  background-color: #c2883a;
+}
+
+.prestasi-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;  color: #003366;
+  margin: 0;
+  font-weight: 500;
+}
+
+.link-semua {
+  text-decoration: none;
+  color: #003366;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  padding: 8px 20px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.link-semua .link-icon {
+  transition: transform 0.3s ease;
+}
+
+.link-semua:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.link-semua:hover .link-icon {
+  transform: translateX(5px);
+}
+
+.prestasi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.prestasi-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  transition: transform 0.3s ease;
+}
+
+.prestasi-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag-tingkat {
+  background: #003366;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tag-kategori {
+  background: #ffedd5;
+  color: #c2883a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.card-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.card-title {
+  font-size: 18px;
+  color: #003366;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+}
+
+.card-link {
+  text-decoration: none;
+  color: #003366;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.card-link:hover {
+  color: #c2883a;
+}
+
+/* =========================================
+   RESPONSIVE (TABLET & HP)
+   ========================================= */
+
+@media (max-width: 1024px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 4rem 5%;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Di HP, ubah arah gradasi menjadi top-to-bottom */
+  .hero-overlay-gradient {
+    background: linear-gradient(
+      to bottom,
+      rgba(250, 249, 246, 1) 0%,
+      rgba(250, 249, 246, 0.95) 45%,
+      rgba(250, 249, 246, 0.6) 75%,
+      rgba(250, 249, 246, 0.2) 100%
+    );
+  }
+
+  .hero-wrapper {
+    background-position: center;
+  }
+
+.hero-section {
+    grid-template-columns: 1fr;
+    padding: 3rem 5%;
+    text-align: left; /* KUNCI 1: Ubah center menjadi left */
+  }
+
+.hero-subtitle { 
+    justify-content: flex-start; /* KUNCI 2: Ubah center menjadi flex-start agar rata kiri */
+    display: flex; 
+  }
+
+.hero-desc { 
+    max-width: 100%; 
+    margin: 0 0 2rem 0; /* KUNCI 3: Hapus 'auto' agar margin menempel di kiri */
+  }
+
+  .stats-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .stat-item {
+    width: 100%;
+  }
+
+  .stat-item:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #eaeaea;
+    margin-right: 0;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .prestasi-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

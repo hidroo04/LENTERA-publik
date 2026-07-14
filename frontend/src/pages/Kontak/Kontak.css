@@ -1,0 +1,135 @@
+/* =========================================
+   LAYOUT UTAMA HALAMAN KONTAK
+   ========================================= */
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FAF9F6;
+  background-image: radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
+                    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
+  display: flex;
+  flex-direction: column;
+}
+
+.kontak-main {
+  flex: 1;
+  max-width: 1100px; /* Dibuat sedikit lebih sempit agar kartu tidak terlalu melebar */
+  margin: 0 auto;
+  padding: 4rem 5%;
+  width: 100%;
+}
+
+.kontak-header {
+  margin-bottom: 2.5rem;
+}
+
+.kontak-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  color: #002244;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* =========================================
+   SISTEM GRID (Dua Kolom)
+   ========================================= */
+.kontak-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch; /* Memastikan kedua kartu punya tinggi yang sama */
+}
+
+/* =========================================
+   KARTU KONTAK (Base)
+   ========================================= */
+.kontak-card {
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kontak-card:hover {
+  transform: translateY(-5px);
+}
+
+/* =========================================
+   KARTU PUTIH (Sebelah Kiri)
+   ========================================= */
+.card-white {
+  background: #ffffff;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.kontak-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Jarak antar baris kontak */
+}
+
+.kontak-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 15px;
+  color: #333;
+}
+
+.kontak-icon {
+  font-size: 18px;
+  color: #002244;
+  min-width: 24px; /* Menjaga agar ikon rata sejajar ke bawah */
+  text-align: center;
+}
+
+/* =========================================
+   KARTU HIJAU (Sebelah Kanan)
+   ========================================= */
+.card-green {
+  background: #61956e; /* Warna hijau khas seperti di gambar */
+  box-shadow: 0 4px 25px rgba(97, 149, 110, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.layanan-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #002244;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+}
+
+.layanan-desc {
+  font-size: 15px;
+  color: #1a2f3a; /* Warna teks gelap yang mudah dibaca di atas hijau */
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (HP & Tablet)
+   ========================================= */
+@media (max-width: 768px) {
+  .kontak-main {
+    padding: 3rem 5%;
+  }
+
+  .kontak-title {
+    font-size: 2.5rem;
+  }
+
+  .kontak-grid {
+    grid-template-columns: 1fr; /* Berubah menjadi 1 kolom menyusun atas-bawah */
+    gap: 1.5rem;
+  }
+  
+  .kontak-card {
+    padding: 2rem;
+  }
+}

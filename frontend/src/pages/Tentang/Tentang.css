@@ -1,0 +1,150 @@
+/* =========================================
+   LAYOUT UTAMA HALAMAN TENTANG
+   ========================================= */
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FAF9F6;
+  background-image: radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
+                    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
+  display: flex;
+  flex-direction: column;
+}
+
+.tentang-main {
+  flex: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 5rem 5%;
+  width: 100%;
+}
+
+/* =========================================
+   SISTEM GRID (Dua Kolom)
+   ========================================= */
+.tentang-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Kolom kanan sedikit lebih lebar */
+  gap: 5rem;
+  align-items: flex-start;
+}
+
+/* =========================================
+   KOLOM KIRI (Judul)
+   ========================================= */
+.tentang-left {
+  display: flex;
+  flex-direction: column;
+  position: sticky; /* Membuat judul tetap di tempat saat discroll (opsional jika konten kanan panjang) */
+  top: 120px;
+}
+
+.tentang-label {
+  color: #c2883a; /* Warna Oranye BPS */
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.tentang-title {
+  font-family: 'Playfair Display', serif; /* Font Serif Elegan */
+  font-size: 3.5rem;
+  color: #002244;
+  line-height: 1.15;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* =========================================
+   KOLOM KANAN (Deskripsi & Kartu)
+   ========================================= */
+.tentang-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tentang-desc {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+}
+
+/* Kartu Visi dan Misi */
+.tentang-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03); /* Bayangan sangat halus persis gambar */
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tentang-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.card-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #002244;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+}
+
+.card-text {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Gaya khusus untuk list (bullet points) di Misi */
+.card-list {
+  margin: 0;
+  padding: 0 0 0 1.2rem; /* Jarak titik dari tepi */
+  color: #666;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.card-list li {
+  margin-bottom: 8px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (HP & Tablet)
+   ========================================= */
+@media (max-width: 992px) {
+  .tentang-grid {
+    grid-template-columns: 1fr; /* Berubah menjadi 1 kolom bersusun atas-bawah */
+    gap: 3rem;
+  }
+  
+  .tentang-left {
+    position: relative; /* Menghilangkan efek sticky di layar kecil */
+    top: 0;
+  }
+
+  .tentang-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tentang-main {
+    padding: 3rem 5%;
+  }
+  
+  .tentang-title {
+    font-size: 2.2rem;
+  }
+  
+  .tentang-card {
+    padding: 2rem 1.5rem;
+  }
+}
