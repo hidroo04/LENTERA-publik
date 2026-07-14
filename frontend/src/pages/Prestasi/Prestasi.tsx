@@ -1,16 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import './prestasi.css';
 
-// Import Header dan Footer (Pastikan jalurnya sesuai dengan folder kamu)
+// Import Header dan Footer
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 // Import Icons
-import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
+import { FaSearch, FaArrowRight, FaChevronDown, FaFilter } from 'react-icons/fa';
 
-// ==========================================
-// KOMPONEN CUSTOM DROPDOWN (Agar bisa di-style biru persis gambar)
-// ==========================================
+// Import Hooks API
+import { useAchievements } from '../../hooks/useAchievements';
+import { useCategories } from '../../hooks/useCategories';
+
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600';
+
+// ── Helper ─────────────────────────────────────────────────────────────────────
+function formatDate(dateStr: string | null): string {
+  if (!dateStr) return '-';
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function levelClass(level: string): string {
+  switch (level) {
+    case 'Internasional': return 'badge-internasional';
+    case 'Nasional':      return 'badge-nasional';
+    case 'Provinsi':      return 'badge-provinsi';
+    default:              return 'badge-kabupaten';
+  }
+}
+
+// ── Custom Dropdown ────────────────────────────────────────────────────────────
 interface DropdownProps {
   options: string[];
   value: string;
@@ -21,7 +41,6 @@ const CustomDropdown: React.FC<DropdownProps> = ({ options, value, onChange }) =
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Menutup dropdown jika diklik di luar area
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -41,8 +60,8 @@ const CustomDropdown: React.FC<DropdownProps> = ({ options, value, onChange }) =
       {isOpen && (
         <div className="dropdown-menu">
           {options.map((option, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`dropdown-item ${value === option ? 'active' : ''}`}
               onClick={() => {
                 onChange(option);
@@ -58,133 +77,189 @@ const CustomDropdown: React.FC<DropdownProps> = ({ options, value, onChange }) =
   );
 };
 
-// ==========================================
-// HALAMAN UTAMA PRESTASI
-// ==========================================
+// ── Halaman Prestasi ───────────────────────────────────────────────────────────
 const Prestasi = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [category, setCategory] = useState('Semua category');
-  const [level, setLevel] = useState('Semua level');
-  const [year, setYear] = useState('Semua year');
-  const [sort, setSort] = useState('Terbaru');
+  const [searchParams] = useSearchParams();
 
-  // Pilihan Dropdown
-  const categoryOptions = ['Semua category', 'Penghargaan', 'Pelayanan Publik', 'Statistik Resmi', 'Transformasi Digital', 'Tata Kelola', 'Literasi Statistik'];
-  const levelOptions = ['Semua level', 'Nasional', 'Provinsi', 'Internasional', 'Kota'];
-  const yearOptions = ['Semua year', '2025', '2024'];
-  const sortOptions = ['Terbaru', 'Terlama', 'Alfabetis'];
+  // State filter — sinkronkan dari URL query jika ada (dari redirect Beranda search)
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') ?? '');
+  const [searchInput, setSearchInput]  = useState(searchParams.get('search') ?? '');
+  const [selectedCategory, setSelectedCategory] = useState('Semua Kategori');
+  const [selectedLevel, setSelectedLevel]       = useState('Semua Level');
+  const [selectedSort, setSelectedSort]         = useState('Terbaru');
+  const [currentPage, setCurrentPage]           = useState(1);
 
-  // Data Dummy Persis Seperti Gambar
-  const dataPrestasi = [
-    {
-      id: 1,
-      tingkat: 'Nasional',
-      kategori: 'Penghargaan',
-      tanggal: '2 Mei 2025',
-      judul: 'Penghargaan Anugerah Keterbukaan Informasi Publik 2024',
-      deskripsi: 'Diberikan atas komitmen BPS dalam mewujudkan transparansi dan keterbukaan informasi statistik resmi...',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 2,
-      tingkat: 'Provinsi',
-      kategori: 'Pelayanan Publik',
-      tanggal: '18 Apr 2025',
-      judul: 'Inovasi Pelayanan Publik Terbaik Tingkat Provinsi 2025',
-      deskripsi: 'Inovasi kanal layanan statistik terpadu dinilai berdampak positif, inklusif, dan berkelanjutan bagi...',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 3,
-      tingkat: 'Internasional',
-      kategori: 'Statistik Resmi',
-      tanggal: '10 Mar 2025',
-      judul: 'Excellence in Official Statistics Award (EOSA) 2025',
-      deskripsi: 'Penghargaan internasional atas kualitas, integritas, dan inovasi diseminasi statistik resmi Indonesia.',
-      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 4,
-      tingkat: 'Nasional',
-      kategori: 'Transformasi Digital',
-      tanggal: '21 Nov 2024',
-      judul: 'Satu Data Indonesia Award untuk Integrasi Metadata Statistik',
-      deskripsi: 'BPS memperoleh apresiasi atas penguatan tata kelola metadata dan interoperabilitas data lintas instansi.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 5,
-      tingkat: 'Nasional',
-      kategori: 'Tata Kelola',
-      tanggal: '4 Sep 2024',
-      judul: 'Predikat Wilayah Bebas dari Korupsi untuk Unit Pelayanan Statistik',
-      deskripsi: 'Penghargaan diberikan untuk peningkatan kualitas layanan, akuntabilitas, dan budaya kerja berintegritas.',
-      image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 6,
-      tingkat: 'Kota',
-      kategori: 'Literasi Statistik',
-      tanggal: '22 Jun 2024',
-      judul: 'Juara Kolaborasi Data Journalism dan Literasi Statistik Publik',
-      deskripsi: 'Program literasi statistik berbasis cerita data berhasil memperluas pemanfaatan data resmi oleh komunitas...',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600',
-    }
-  ];
+  // ── Data dari API ──────────────────────────────────────────────────────────
+  const { categories } = useCategories();
+
+  // Bangun filter berdasarkan state
+  const categoryId = categories.find(c => c.name === selectedCategory)?.id;
+  const levelMap: Record<string, string> = {
+    'Nasional':      'Nasional',
+    'Provinsi':      'Provinsi',
+    'Internasional': 'Internasional',
+    'Kabupaten':     'Kabupaten',
+  };
+  const sortMap: Record<string, string> = {
+    'Terbaru':   'terbaru',
+    'Terlama':   'terlama',
+    'Alfabetis': 'alphabetical',
+  };
+
+  const { achievements, loading, error, meta } = useAchievements({
+    search:      searchQuery || undefined,
+    category_id: categoryId,
+    level:       selectedLevel !== 'Semua Level' ? levelMap[selectedLevel] : undefined,
+    sort:        sortMap[selectedSort] ?? 'terbaru',
+    per_page:    9,
+    page:        currentPage,
+  });
+
+  // Reset halaman ke 1 jika filter berubah
+  useEffect(() => { setCurrentPage(1); }, [searchQuery, selectedCategory, selectedLevel, selectedSort]);
+
+  // Opsi dropdown — kategori dari API + "Semua Kategori"
+  const categoryOptions = ['Semua Kategori', ...categories.map(c => c.name)];
+  const levelOptions    = ['Semua Level', 'Nasional', 'Internasional', 'Provinsi', 'Kabupaten'];
+  const sortOptions     = ['Terbaru', 'Terlama', 'Alfabetis'];
+
+  const handleSearch = () => {
+    setSearchQuery(searchInput.trim());
+    setCurrentPage(1);
+  };
 
   return (
     <div className="page-container">
       <Header />
-      
+
       <main className="prestasi-main">
         {/* Header Section */}
         <div className="prestasi-header-section">
           <h1 className="prestasi-page-title">Daftar Prestasi</h1>
-          <p className="prestasi-page-subtitle">Hanya menampilkan data berstatus published dari API read-only.</p>
+          <p className="prestasi-page-subtitle">
+            Menampilkan seluruh prestasi yang telah dipublikasikan.
+          </p>
         </div>
 
         {/* Filter Bar */}
         <div className="filter-bar">
           <div className="search-input-wrapper">
             <FaSearch className="search-icon-filter" />
-            <input 
-              type="text" 
-              placeholder="Cari judul prestasi..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+            <input
+              type="text"
+              placeholder="Cari judul prestasi..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             />
           </div>
 
           <div className="dropdowns-wrapper">
-            <CustomDropdown options={categoryOptions} value={category} onChange={setCategory} />
-            <CustomDropdown options={levelOptions} value={level} onChange={setLevel} />
-            <CustomDropdown options={yearOptions} value={year} onChange={setYear} />
-            <CustomDropdown options={sortOptions} value={sort} onChange={setSort} />
+            <CustomDropdown options={categoryOptions}  value={selectedCategory}  onChange={setSelectedCategory} />
+            <CustomDropdown options={levelOptions}     value={selectedLevel}     onChange={setSelectedLevel} />
+            <CustomDropdown options={sortOptions}      value={selectedSort}      onChange={setSelectedSort} />
           </div>
+
+          <button className="btn-filter-search" onClick={handleSearch} title="Terapkan Filter">
+            <FaFilter /> Filter
+          </button>
         </div>
 
-        {/* Grid Prestasi */}
-        <div className="daftar-prestasi-grid">
-          {dataPrestasi.map((item) => (
-            <div key={item.id} className="daftar-prestasi-card">
-              <img src={item.image} alt={item.judul} className="card-img" />
-              <div className="card-body">
-                <div className="card-top-meta">
-                  <div className="card-badges">
-                    <span className="badge-tingkat">{item.tingkat}</span>
-                    <span className="badge-kategori">{item.kategori}</span>
-                  </div>
-                  <span className="card-tanggal">{item.tanggal}</span>
+        {/* Error State */}
+        {error && (
+          <div className="fetch-error">
+            <p>⚠️ {error}</p>
+            <p>Pastikan backend Laravel berjalan di <code>http://127.0.0.1:8000</code></p>
+          </div>
+        )}
+
+        {/* Loading State */}
+        {loading && (
+          <div className="daftar-prestasi-grid">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="daftar-prestasi-card daftar-prestasi-card--skeleton">
+                <div className="skeleton-card-img" />
+                <div className="card-body">
+                  <div className="sk-line sk-line--short" />
+                  <div className="sk-line" />
+                  <div className="sk-line sk-line--medium" />
                 </div>
-                <h4 className="card-title-text">{item.judul}</h4>
-                <p className="card-deskripsi">{item.deskripsi}</p>
-                <a href="#" className="card-action-link">
-                  Lihat Detail <FaArrowRight style={{marginLeft: '6px', fontSize: '11px'}}/>
-                </a>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+
+        {/* Grid Prestasi */}
+        {!loading && !error && (
+          <>
+            {/* Info jumlah hasil */}
+            {meta && (
+              <p className="result-count">
+                Menampilkan <strong>{achievements.length}</strong> dari <strong>{meta.total}</strong> prestasi
+              </p>
+            )}
+
+            {achievements.length === 0 ? (
+              <div className="empty-state">
+                <p>Tidak ada prestasi yang sesuai filter.</p>
+              </div>
+            ) : (
+              <div className="daftar-prestasi-grid">
+                {achievements.map((item) => (
+                  <div key={item.id} className="daftar-prestasi-card">
+                    <img
+                      src={item.thumbnail_url ?? FALLBACK_IMAGE}
+                      alt={item.title}
+                      className="card-img"
+                      onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
+                    />
+                    <div className="card-body">
+                      <div className="card-top-meta">
+                        <div className="card-badges">
+                          <span className={`badge-tingkat ${levelClass(item.level)}`}>{item.level}</span>
+                          {item.category?.name && (
+                            <span className="badge-kategori">{item.category.name}</span>
+                          )}
+                        </div>
+                        <span className="card-tanggal">{formatDate(item.achievement_date)}</span>
+                      </div>
+                      <h4 className="card-title-text">{item.title}</h4>
+                      <p className="card-deskripsi">{item.short_description}</p>
+                      <Link to={`/prestasi/${item.slug}`} className="card-action-link">
+                        Lihat Detail <FaArrowRight style={{ marginLeft: '6px', fontSize: '11px' }} />
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Pagination */}
+            {meta && meta.last_page > 1 && (
+              <div className="pagination-wrapper">
+                <button
+                  className="page-btn"
+                  disabled={currentPage <= 1}
+                  onClick={() => setCurrentPage(p => p - 1)}
+                >
+                  ← Sebelumnya
+                </button>
+
+                <span className="page-info">
+                  Halaman {meta.current_page} dari {meta.last_page}
+                </span>
+
+                <button
+                  className="page-btn"
+                  disabled={currentPage >= meta.last_page}
+                  onClick={() => setCurrentPage(p => p + 1)}
+                >
+                  Selanjutnya →
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </main>
 
       <Footer />
