@@ -44,7 +44,7 @@ const Kontak = () => {
               </div>
               <div className="kontak-text">
                 <h3 className="kontak-item-title">Alamat</h3>
-                <p className="kontak-item-desc">Jl. Merdeka Pendidikan No. 24, Jakarta</p>
+                <p className="kontak-item-desc">Jl. Raya Gadingrejo No.KM.33, Wonodadi, Kec. Gading Rejo, Kabupaten Pringsewu, Lampung 35372</p>
               </div>
             </div>
 
@@ -55,7 +55,7 @@ const Kontak = () => {
               </div>
               <div className="kontak-text">
                 <h3 className="kontak-item-title">Email</h3>
-                <p className="kontak-item-desc">humas@instansi.go.id</p>
+                <p className="kontak-item-desc">bps1810@bps.go.id</p>
               </div>
             </div>
 
@@ -66,7 +66,7 @@ const Kontak = () => {
               </div>
               <div className="kontak-text">
                 <h3 className="kontak-item-title">Telepon</h3>
-                <p className="kontak-item-desc">(021) 7788 1200</p>
+                <p className="kontak-item-desc">(0729) 7330811</p>
               </div>
             </div>
 
@@ -77,7 +77,7 @@ const Kontak = () => {
               </div>
               <div className="kontak-text">
                 <h3 className="kontak-item-title">Instagram</h3>
-                <p className="kontak-item-desc">@prestasi.instansi</p>
+                <p className="kontak-item-desc">@bps_pringsewu</p>
               </div>
             </div>
 
@@ -88,7 +88,7 @@ const Kontak = () => {
               </div>
               <div className="kontak-text">
                 <h3 className="kontak-item-title">Facebook</h3>
-                <p className="kontak-item-desc">Prestasi Instansi</p>
+                <p className="kontak-item-desc">Bps Kabupaten Pringsewu</p>
               </div>
             </div>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css'; 
-import LogoWeb from '../../assets/Logo_bps.png';
+import LogoWeb from '../../assets/logo-lentera.png';
 import { FaSearch, FaThLarge, FaHome, FaTimes } from 'react-icons/fa';
 
 import { NAVIGATION_MENU, APP_NAME } from '../../constants';

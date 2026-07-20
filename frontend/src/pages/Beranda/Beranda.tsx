@@ -58,7 +58,7 @@ const Beranda = () => {
                     <p className="stat-value">
                       {statsLoading ? '...' : (stats?.total_achievements ?? 0)}
                     </p>
-                    <p className="stat-label">Prestasi<br/>Published</p>
+                    <p className="stat-label">Prestasi</p>
                   </div>
                 </div>
 
