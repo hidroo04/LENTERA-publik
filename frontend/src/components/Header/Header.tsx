@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Header.css'; // sebelumnya './header.css' - perbaiki casing agar tidak gagal build di server case-sensitive (Linux)
-import LogoBps from '../../assets/Logo_bps.png';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import './Header.css'; 
+import LogoWeb from '../../assets/Logo_bps.png';
 import { FaSearch, FaThLarge, FaHome, FaTimes } from 'react-icons/fa';
 
-const NAV_LINKS = [
-  { path: '/', label: 'Beranda' },
-  { path: '/prestasi', label: 'Prestasi' },
-  { path: '/statistik', label: 'Statistik' },
-  { path: '/tentang', label: 'Tentang' },
-  { path: '/kontak', label: 'Kontak' },
-];
+import { NAVIGATION_MENU, APP_NAME } from '../../constants';
 
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleNav = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -30,10 +26,21 @@ const Header = () => {
     if (!isSearchOpen) setIsNavOpen(false);
   };
 
-  // Cukup tutup sidebar saat link diklik.
-  // Navigasi ke halaman tujuan sudah otomatis ditangani oleh <Link to="...">,
-  // jadi tidak perlu lagi preventDefault() + navigate() manual (itu penyebab konfliknya).
   const closeNav = () => setIsNavOpen(false);
+
+  const handleSearchSubmit = () => {
+    const value = searchQuery.trim();
+    if (!value) return;
+    
+    navigate(`/prestasi?search=${encodeURIComponent(value)}`);
+    setIsSearchOpen(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchSubmit();
+    }
+  };
 
   return (
     <>
@@ -44,10 +51,10 @@ const Header = () => {
       <header className="global-header">
         <div className="header-brand">
           <Link to="/" onClick={closeNav} className="brand-link-wrapper">
-            <img src={LogoBps} alt="Logo BPS" className="brand-logo" />
+            <img src={LogoWeb} alt="Logo BPS" className="brand-logo" />
           </Link>
           <div className="brand-text">
-            <h1>Badan Pusat Statistik</h1>
+            <h1>{APP_NAME}</h1>
             <p>Arsip Prestasi</p>
           </div>
         </div>
@@ -62,12 +69,11 @@ const Header = () => {
               <FaTimes size={20} />
             </button>
 
-            {NAV_LINKS.map((link) => (
+            {NAVIGATION_MENU.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={location.pathname === link.path ? 'active' : ''}
-                onClick={closeNav}
               >
                 {link.label}
               </Link>
@@ -88,8 +94,20 @@ const Header = () => {
               type="text"
               placeholder="Cari prestasi, kategori..."
               className="search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
-            <button className="search-btn" onClick={toggleSearch}>
+            <button 
+              className="search-btn" 
+              onClick={(e) => {
+                if (isSearchOpen && searchQuery.trim()) {
+                  handleSearchSubmit();
+                } else {
+                  toggleSearch(e);
+                }
+              }}
+            >
               <FaSearch size={16} />
             </button>
           </div>
@@ -100,7 +118,7 @@ const Header = () => {
 
           <button className="btn-kategori" onClick={toggleNav}>
             <FaThLarge />
-            <span>KATEGORI</span>
+            <span>MENU</span>
           </button>
         </div>
 
@@ -110,8 +128,11 @@ const Header = () => {
               type="text"
               placeholder="Cari prestasi..."
               className="mobile-search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
-            <button className="mobile-search-submit">
+            <button className="mobile-search-submit" onClick={handleSearchSubmit}>
               <FaSearch size={16} />
             </button>
           </div>

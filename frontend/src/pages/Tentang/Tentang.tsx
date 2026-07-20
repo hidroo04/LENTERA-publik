@@ -1,13 +1,12 @@
 import './tentang.css';
-
-// Import Komponen Header dan Footer
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import bgImage from '../../assets/bps.jpg';
 
 const Tentang = () => {
   return (
-    <div className="page-container">
-      <Header />
+    <div className="tentang-page-wrapper">
+      <div className="tentang-bg-image" style={{ backgroundImage: `url(${bgImage})` }}></div>
+      <div className="tentang-bg-overlay"></div>
+      <div className="tentang-bg-dots"></div>
 
       <main className="tentang-main">
         <div className="tentang-grid">
@@ -47,8 +46,6 @@ const Tentang = () => {
 
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };

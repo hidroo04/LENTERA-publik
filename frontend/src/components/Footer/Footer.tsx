@@ -24,7 +24,7 @@ const Footer = () => {
         </p>
       </div>
       <div className="footer-copyright">
-        © DIBUAT OLEH GILANG
+        © 2026 Badan Pusat Statistik Kabupaten Pringsewu. All rights reserved.
       </div>
     </footer>
   );

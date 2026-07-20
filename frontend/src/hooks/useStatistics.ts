@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import apiFetch from '../services/api';
-import type { Statistics, ApiResponse } from '../types/achievement';
+import { statisticsApi } from '../api';
+import type { Statistics } from '../types';
 
 interface UseStatisticsReturn {
   stats: Statistics | null;
@@ -11,14 +11,6 @@ interface UseStatisticsReturn {
 /**
  * Hook untuk mengambil statistik prestasi dari backend.
  * Digunakan di section stats card pada Beranda.
- *
- * Response backend:
- * {
- *   total_achievements: number,
- *   total_categories: number,
- *   national: number,
- *   international: number
- * }
  */
 export function useStatistics(): UseStatisticsReturn {
   const [stats, setStats] = useState<Statistics | null>(null);
@@ -33,7 +25,7 @@ export function useStatistics(): UseStatisticsReturn {
       setError(null);
 
       try {
-        const res = await apiFetch<ApiResponse<Statistics>>('/achievements/statistics');
+        const res = await statisticsApi.getStatistics();
 
         if (!cancelled) {
           setStats(res.data ?? null);
@@ -53,3 +45,4 @@ export function useStatistics(): UseStatisticsReturn {
 
   return { stats, loading, error };
 }
+

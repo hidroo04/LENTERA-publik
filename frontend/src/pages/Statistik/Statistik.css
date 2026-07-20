@@ -1,107 +1,356 @@
-/* =========================================
-   LAYOUT UTAMA STATISTIK
-   ========================================= */
-.page-container {
+/* =============================================================================
+   Statistik.css — Halaman Statistik Prestasi
+   ============================================================================= */
+
+/* ── Layout Utama ───────────────────────────────────────────────────────────── */
+.statistik-page-wrapper {
+  position: relative;
   width: 100%;
-  min-height: 100vh;
-  background-color: #FAF9F6;
-  background-image: radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
-                    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef2f5 100%);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/* ── Background Elements ────────────────────────────────────────────────────── */
+.statistik-bg-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background-size: cover;
+  background-position: right top;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 100%);
+}
+
+.statistik-bg-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(238, 242, 245, 1) 0%, rgba(238, 242, 245, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.statistik-bg-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background-image: radial-gradient(#d1d5db 2px, transparent 2px);
+  background-size: 20px 20px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.statistik-main {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  padding: 4rem 2rem;
+  z-index: 2;
   display: flex;
   flex-direction: column;
 }
 
-.statistik-main {
-  flex: 1;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 3rem 5%;
-  width: 100%;
-}
-
+/* ── Header ─────────────────────────────────────────────────────────────────── */
 .statistik-header {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   text-align: left;
 }
 
 .statistik-title {
   font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
+  font-size: 3rem;
   color: #002244;
-  margin: 0 0 10px 0;
-  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.statistik-underline {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.line-blue-main {
+  width: 30px;
+  height: 4px;
+  background-color: #003366;
+  border-radius: 2px;
+}
+
+.line-blue-light {
+  width: 15px;
+  height: 4px;
+  background-color: #5b8ec5;
+  border-radius: 2px;
 }
 
 .statistik-subtitle {
-  font-size: 15px;
-  color: #666;
+  font-size: 1.05rem;
+  color: #4b5563;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Error State ────────────────────────────────────────────────────────────── */
+.statistik-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+/* =============================================================================
+   Stat Summary Cards
+   ============================================================================= */
+.stat-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-summary-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 34, 68, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-summary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 45px rgba(0, 34, 68, 0.08);
+}
+
+.stat-summary-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.stat-summary-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-summary-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #002244;
+  margin: 0 0 0.25rem 0;
+  line-height: 1;
+}
+
+.stat-summary-label {
+  font-size: 0.9rem;
+  color: #6b7280;
   margin: 0;
 }
 
-/* =========================================
-   KARTU DIAGRAM (DI TENGAH)
-   ========================================= */
+/* ── Skeleton Cards ─────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.stat-summary-card--skeleton {
+  pointer-events: none;
+  border-right: none !important;
+}
+
+.ssk-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.ssk-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ssk-line {
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+  width: 100%;
+}
+
+.ssk-line--short { width: 50%; }
+
+/* =============================================================================
+   Bar Chart
+   ============================================================================= */
 .chart-center-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .chart-card {
-  background: #fff;
-  border-radius: 20px;
+  background: #ffffff;
+  border-radius: 16px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  border: 1px solid #eee;
+  box-shadow: 0 10px 40px rgba(0, 34, 68, 0.04);
   width: 100%;
-  max-width: 600px; /* Membatasi lebar chart agar cantik di tengah */
+}
+
+.chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 .chart-card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  color: #003366;
-  margin: 0 0 2rem 0;
-  font-weight: 500;
+  font-size: 1.25rem;
+  color: #002244;
+  margin: 0;
+  font-weight: 700;
 }
 
-/* =========================================
-   DESAIN CUSTOM BAR CHART
-   ========================================= */
+.chart-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.chart-filter-icon {
+  color: #6b7280;
+}
+
+.chart-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #4b5563;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.chart-empty {
+  text-align: center;
+  color: #9ca3af;
+  padding: 3rem 0;
+  font-size: 0.95rem;
+}
+
+/* ── Skeleton Chart ─────────────────────────────────────────────────────────── */
+.chart-skeleton {
+  height: 250px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 1rem;
+}
+
+.cs-bars {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 100%;
+  gap: 10px;
+}
+
+.cs-bar {
+  flex: 1;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* ── Bar Chart Container ────────────────────────────────────────────────────── */
 .bar-chart-container {
   display: flex;
-  height: 250px;
+  height: 300px;
   position: relative;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-/* Sumbu Y (Angka Kiri) */
 .y-axis {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  padding-bottom: 25px; /* Menyesuaikan jarak label X */
-  color: #666;
-  font-size: 14px;
+  padding-bottom: 30px;
+  color: #6b7280;
+  font-size: 12px;
   font-weight: 500;
-  width: 20px;
+  width: 30px;
+  flex-shrink: 0;
 }
 
-/* Area Batang */
+.y-label {
+  position: relative;
+}
+
+.y-label::after {
+  content: '';
+  position: absolute;
+  right: -100vw;
+  top: 50%;
+  width: 100vw;
+  border-top: 1px dashed #f3f4f6;
+  z-index: 0;
+}
+
 .chart-area {
   flex: 1;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
+  padding-bottom: 30px;
+  border-bottom: 1.5px solid #e5e7eb;
+  gap: 4px;
   position: relative;
-  padding-bottom: 25px; /* Ruang untuk teks tahun 2024 & 2025 */
-  border-bottom: 1px solid #ddd;
+  z-index: 1;
 }
 
 .bar-column {
-  width: 40%;
+  min-width: 40px;
+  max-width: 60px;
+  flex: 1;
   height: 100%;
   display: flex;
   align-items: flex-end;
@@ -110,14 +359,10 @@
   cursor: pointer;
 }
 
-/* Efek background abu-abu di belakang saat hover (seperti gambar) */
 .bar-hover-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #f1f4f9;
+  inset: 0;
+  background-color: #f8fafc;
   border-radius: 8px 8px 0 0;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -128,65 +373,105 @@
   opacity: 1;
 }
 
-/* Warna Batang Chart Utama */
 .bar-fill {
-  width: 100%;
-  background-color: #1764A5; /* Biru khas BPS sesuai gambar */
-  border-radius: 8px 8px 0 0; /* Ujung atas membulat */
+  width: 80%;
+  background: #3b82f6;
+  border-radius: 6px 6px 0 0;
   position: relative;
   z-index: 2;
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 4px;
 }
 
-/* Label Tahun (X-Axis) */
+.bar-column:hover .bar-fill {
+  background: #2563eb;
+}
+
 .x-label {
   position: absolute;
-  bottom: -25px;
+  bottom: -28px;
   text-align: center;
   width: 100%;
-  font-size: 15px;
-  color: #666;
+  font-size: 12px;
+  color: #6b7280;
   font-weight: 500;
+  white-space: nowrap;
 }
 
-/* =========================================
-   TOOLTIP MELAYANG (FOLLOW CURSOR)
-   ========================================= */
+/* ── Tooltip Melayang ───────────────────────────────────────────────────────── */
 .custom-tooltip {
   position: fixed;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  padding: 12px 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  pointer-events: none; /* Agar tooltip tidak menutupi sensor mouse */
+  background: #111827;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
   z-index: 9999;
-  transform: translate(15px, -50%); /* Sedikit digeser dari ujung kursor */
+  transform: translate(16px, -50%);
+  min-width: 140px;
 }
 
 .tooltip-year {
-  font-size: 16px;
-  color: #002244;
-  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .tooltip-count {
-  font-size: 15px;
-  color: #1764A5;
+  font-size: 13px;
+  color: #d1d5db;
 }
 
-/* =========================================
-   RESPONSIVE DESIGN (HP & Tablet)
-   ========================================= */
+.tooltip-count strong {
+  color: #fff;
+}
+
+/* ── Footer text ────────────────────────────────────────────────────────────── */
+.statistik-footer-text {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 1rem;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .stat-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .statistik-title {
     font-size: 2.2rem;
   }
-  
+
   .chart-card {
     padding: 1.5rem;
   }
+  
+  .chart-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 
   .bar-chart-container {
-    height: 200px;
+    height: 220px;
+  }
+  
+  .bar-column {
+    min-width: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistik-title {
+    font-size: 1.8rem;
+  }
+
+  .stat-summary-grid {
+    grid-template-columns: 1fr;
   }
 }

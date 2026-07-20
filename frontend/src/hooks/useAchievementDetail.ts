@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import apiFetch from '../services/api';
-import type { Achievement, ApiResponse } from '../types/achievement';
+import { achievementApi } from '../api';
+import type { Achievement } from '../types';
 
 interface UseAchievementDetailReturn {
   achievement: Achievement | null;
@@ -30,7 +30,7 @@ export function useAchievementDetail(slug: string | undefined): UseAchievementDe
       setError(null);
 
       try {
-        const res = await apiFetch<ApiResponse<Achievement>>(`/public/achievements/${slug}`);
+        const res = await achievementApi.detail(slug);
 
         if (!cancelled) {
           setAchievement(res.data ?? null);
@@ -50,3 +50,4 @@ export function useAchievementDetail(slug: string | undefined): UseAchievementDe
 
   return { achievement, loading, error };
 }
+

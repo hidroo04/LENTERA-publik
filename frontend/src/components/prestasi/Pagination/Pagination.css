@@ -1,0 +1,67 @@
+/* =============================================================================
+   Pagination — Navigasi Halaman
+   ============================================================================= */
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e8e8;
+  flex-wrap: wrap;
+}
+
+/* ── Tombol Navigasi ────────────────────────────────────────────────────────── */
+.pagination__btn {
+  padding: 9px 22px;
+  border: 1.5px solid #003366;
+  background: #fff;
+  color: #003366;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+
+.pagination__btn:hover:not(:disabled) {
+  background: #003366;
+  color: #fff;
+}
+
+.pagination__btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.pagination__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #aaa;
+}
+
+/* ── Info Halaman ───────────────────────────────────────────────────────────── */
+.pagination__info {
+  font-size: 0.875rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.pagination__info strong {
+  color: #003366;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .pagination-wrapper {
+    gap: 0.75rem;
+  }
+
+  .pagination__btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}

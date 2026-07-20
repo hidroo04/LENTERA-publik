@@ -1,28 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
 import { FaArrowLeft, FaTrophy, FaCalendarAlt, FaBuilding, FaUser, FaTag } from 'react-icons/fa';
 
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import { useAchievementDetail } from '../../hooks/useAchievementDetail';
+import { formatDate, levelBadgeClass } from '../../utils';
+import { FALLBACK_IMAGE } from '../../constants';
 import './PrestasiDetail.css';
 
-const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800';
-
-function formatDate(dateStr: string | null): string {
-  if (!dateStr) return '-';
-  return new Date(dateStr).toLocaleDateString('id-ID', {
-    day: 'numeric', month: 'long', year: 'numeric',
-  });
-}
-
-function levelClass(level: string): string {
-  switch (level) {
-    case 'Internasional': return 'badge-internasional';
-    case 'Nasional':      return 'badge-nasional';
-    case 'Provinsi':      return 'badge-provinsi';
-    default:              return 'badge-kabupaten';
-  }
-}
 
 const PrestasiDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -30,7 +13,6 @@ const PrestasiDetail = () => {
 
   return (
     <div className="detail-container">
-      <Header />
 
       <main className="detail-main">
         {/* Breadcrumb */}
@@ -73,7 +55,7 @@ const PrestasiDetail = () => {
             {/* Header Artikel */}
             <div className="detail-head">
               <div className="detail-badges">
-                <span className={`detail-badge ${levelClass(achievement.level)}`}>
+                <span className={`detail-badge ${levelBadgeClass(achievement.level, 'badge')}`}>
                   {achievement.level}
                 </span>
                 {achievement.category?.name && (
@@ -129,6 +111,14 @@ const PrestasiDetail = () => {
                   : <p style={{ color: '#999' }}>Deskripsi belum tersedia.</p>
                 }
               </div>
+              
+              {achievement.attachment_url && (
+                <div style={{ marginTop: '2rem' }}>
+                    <a href={achievement.attachment_url} target="_blank" rel="noreferrer" className="back-btn" style={{ background: '#2563eb', color: 'white', display: 'inline-flex', padding: '10px 16px', borderRadius: '8px', textDecoration: 'none', fontWeight: 500 }}>
+                        Lihat Dokumen / Sertifikat
+                    </a>
+                </div>
+              )}
             </div>
 
             {/* Footer artikel */}
@@ -144,7 +134,6 @@ const PrestasiDetail = () => {
         )}
       </main>
 
-      <Footer />
     </div>
   );
 };

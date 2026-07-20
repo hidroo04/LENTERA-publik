@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PublicLayout from './layouts/PublicLayout/PublicLayout';
 
 // Import semua halaman
 import Beranda from './pages/Beranda/Beranda';
@@ -12,12 +13,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/"                element={<Beranda />} />
-        <Route path="/prestasi"        element={<Prestasi />} />
-        <Route path="/prestasi/:slug"  element={<PrestasiDetail />} />
-        <Route path="/statistik"       element={<Statistik />} />
-        <Route path="/tentang"         element={<Tentang />} />
-        <Route path="/kontak"          element={<Kontak />} />
+        <Route element={<PublicLayout />}>
+          <Route path="/"                element={<Beranda />} />
+          <Route path="/prestasi"        element={<Prestasi />} />
+          <Route path="/prestasi/:slug"  element={<PrestasiDetail />} />
+          <Route path="/statistik"       element={<Statistik />} />
+          <Route path="/tentang"         element={<Tentang />} />
+          <Route path="/kontak"          element={<Kontak />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -1,12 +1,17 @@
-/* =========================================
-   LAYOUT UTAMA HALAMAN PRESTASI
-   ========================================= */
+/* =============================================================================
+   Prestasi.css — Layout halaman Prestasi
+   Styling komponen (FilterBar, AchievementCard, Pagination) sudah ada
+   di file CSS masing-masing komponen.
+   ============================================================================= */
+
+/* ── Container ──────────────────────────────────────────────────────────────── */
 .page-container {
   width: 100%;
   min-height: 100vh;
   background-color: #FAF9F6;
-  background-image: radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
-                    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
+  background-image:
+    radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
   display: flex;
   flex-direction: column;
 }
@@ -19,17 +24,17 @@
   width: 100%;
 }
 
-/* Header Teks */
+/* ── Header Section ─────────────────────────────────────────────────────────── */
 .prestasi-header-section {
   margin-bottom: 2rem;
 }
 
 .prestasi-page-title {
-  font-family: 'Playfair Display', serif; /* Font bernuansa elegan jika ada, jika tidak otomatis ke fallback */
   font-size: 2.8rem;
   color: #002244;
   margin: 0 0 10px 0;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .prestasi-page-subtitle {
@@ -38,364 +43,62 @@
   margin: 0;
 }
 
-/* =========================================
-   FILTER BAR (Kapsul Pencarian & Dropdown)
-   ========================================= */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  align-items: center;
-}
-
-.search-input-wrapper {
-  flex: 1;
-  min-width: 250px;
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 50px;
-  padding: 10px 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-}
-
-.search-icon-filter {
-  color: #999;
-  margin-right: 12px;
-}
-
-.search-input-wrapper input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  color: #333;
-}
-
-.dropdowns-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-/* =========================================
-   CUSTOM DROPDOWN (Pilihan dengan Warna Biru)
-   ========================================= */
-.custom-dropdown {
-  position: relative;
-  min-width: 160px;
-  user-select: none;
-}
-
-.dropdown-selected {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 50px;
-  padding: 12px 20px;
-  font-size: 14px;
-  color: #002244;
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-  transition: all 0.2s ease;
-}
-
-.dropdown-selected:hover {
-  border-color: #003366;
-}
-
-.dropdown-icon {
-  font-size: 10px;
-  color: #002244;
-  transition: transform 0.3s ease;
-}
-
-.dropdown-icon.open {
-  transform: rotate(180deg);
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 110%;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px; /* Tidak dibuat kapsul agar opsi terlihat tegas */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  overflow: hidden;
-  z-index: 10;
-  padding: 4px 0;
-}
-
-.dropdown-item {
-  padding: 10px 16px;
-  font-size: 14px;
-  color: #002244;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-/* EFEK BIRU SAAT HOVER (Persis seperti gambar 3,4,5,6) */
-.dropdown-item:hover {
-  background-color: #9ec5fe; 
-  color: #002244;
-}
-
-/* Opsi yang sudah dipilih hanya kita beri teks agak tebal, tanpa background biru yang nyangkut */
-.dropdown-item.active {
-  font-weight: 700;
-}
-
-/* =========================================
-   GRID KARTU PRESTASI
-   ========================================= */
-.daftar-prestasi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.daftar-prestasi-card {
-  background: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.daftar-prestasi-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-.card-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.card-top-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.card-badges {
-  display: flex;
-  gap: 8px;
-}
-
-.badge-tingkat {
-  background: #003366;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.badge-kategori {
-  background: #ffedd5;
-  color: #c2883a;
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.card-tanggal {
-  font-size: 12px;
-  color: #888;
-}
-
-.card-title-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  color: #003366;
-  margin: 0 0 12px 0;
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.card-deskripsi {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.6;
-  margin: 0 0 20px 0;
-  flex: 1; /* Mendorong tombol 'Lihat Detail' ke bagian bawah */
-}
-
-.card-action-link {
-  text-decoration: none;
-  color: #003366;
-  font-size: 14px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  transition: color 0.3s ease;
-  margin-top: auto;
-}
-
-.card-action-link:hover {
-  color: #c2883a;
-}
-
-/* =========================================
-   RESPONSIVE DESIGN (HP & Tablet)
-   ========================================= */
-@media (max-width: 768px) {
-  .prestasi-page-title {
-    font-size: 2.2rem;
-  }
-  
-  .filter-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .dropdowns-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Membagi dropdown menjadi 2 kolom di HP */
-  }
-
-  .custom-dropdown {
-    width: 100%;
-    min-width: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .dropdowns-wrapper {
-    grid-template-columns: 1fr; /* Jadi 1 kolom bersusun ke bawah di layar sangat kecil */
-  }
-}
-
-/* =========================================
-   BADGE LEVEL COLORS
-   ========================================= */
-.badge-tingkat.badge-internasional { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
-.badge-tingkat.badge-nasional      { background:#f0fdf4; color:#16a34a; border:1px solid #bbf7d0; }
-.badge-tingkat.badge-provinsi      { background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; }
-.badge-tingkat.badge-kabupaten     { background:#f8fafc; color:#64748b; border:1px solid #e2e8f0; }
-
-/* =========================================
-   TOMBOL FILTER
-   ========================================= */
-.btn-filter-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: #003366;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-  white-space: nowrap;
-}
-.btn-filter-search:hover { background: #002244; }
-
-/* =========================================
-   RESULT COUNT
-   ========================================= */
+/* ── Info Jumlah Hasil ──────────────────────────────────────────────────────── */
 .result-count {
   font-size: 0.9rem;
   color: #666;
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
 }
 
-/* =========================================
-   EMPTY STATE
-   ========================================= */
-.empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #888;
-  font-size: 1rem;
+/* ── Grid Prestasi ──────────────────────────────────────────────────────────── */
+.prestasi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
 }
 
-/* =========================================
-   FETCH ERROR
-   ========================================= */
-.fetch-error {
+/* ── Error State ────────────────────────────────────────────────────────────── */
+.prestasi-error {
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
   padding: 1rem 1.5rem;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
-.fetch-error code { background:#fff3f3; padding: 2px 6px; border-radius: 4px; }
 
-/* =========================================
-   PAGINATION
-   ========================================= */
-.pagination-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e8e8e8;
+.prestasi-error code {
+  background: #fff3f3;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
 }
-.page-btn {
-  padding: 9px 20px;
-  border: 1px solid #003366;
+
+/* ── Empty State ────────────────────────────────────────────────────────────── */
+.prestasi-empty {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: #888;
+  font-size: 1rem;
   background: #fff;
-  color: #003366;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+  border-radius: 16px;
+  border: 1px dashed #ddd;
 }
-.page-btn:hover:not(:disabled)  { background: #003366; color: #fff; }
-.page-btn:disabled               { opacity: 0.4; cursor: not-allowed; }
-.page-info { font-size: 0.9rem; color: #555; font-weight: 500; }
 
-/* =========================================
-   SKELETON LOADING
-   ========================================= */
-@keyframes shimmer {
-  0%   { background-position: -600px 0; }
-  100% { background-position: 600px 0; }
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .prestasi-page-title {
+    font-size: 2.2rem;
+  }
+
+  .prestasi-main {
+    padding: 2rem 4%;
+  }
 }
-.daftar-prestasi-card--skeleton { pointer-events: none; }
-.skeleton-card-img {
-  width: 100%;
-  height: 190px;
-  border-radius: 12px 12px 0 0;
-  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
-  background-size: 600px 100%;
-  animation: shimmer 1.4s infinite;
+
+@media (max-width: 480px) {
+  .prestasi-page-title {
+    font-size: 1.8rem;
+  }
 }
-.sk-line {
-  height: 13px;
-  border-radius: 6px;
-  margin: 10px 0;
-  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
-  background-size: 600px 100%;
-  animation: shimmer 1.4s infinite;
-}
-.sk-line--short  { width: 40%; }
-.sk-line--medium { width: 65%; }

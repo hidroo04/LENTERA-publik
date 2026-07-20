@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react';
-import apiFetch from '../services/api';
-import type { Achievement, PaginatedResponse } from '../types/achievement';
-
-export interface AchievementFilters {
-  search?: string;
-  category_id?: number | string;
-  level?: string;
-  sort?: string;
-  per_page?: number;
-  page?: number;
-}
+import { achievementApi } from '../api';
+import type { Achievement, PaginatedResponse, AchievementFilters } from '../types';
 
 interface UseAchievementsReturn {
   achievements: Achievement[];
@@ -38,21 +29,13 @@ export function useAchievements(filters: AchievementFilters = {}): UseAchievemen
       setError(null);
 
       try {
-        // Bangun query string dari filters
-        const params = new URLSearchParams();
-        if (filters.search) params.set('search', filters.search);
-        if (filters.category_id) params.set('category_id', String(filters.category_id));
-        if (filters.level) params.set('level', filters.level);
-        if (filters.sort) params.set('sort', filters.sort);
-        if (filters.per_page) params.set('per_page', String(filters.per_page));
-        if (filters.page) params.set('page', String(filters.page));
-
-        const query = params.toString() ? `?${params.toString()}` : '';
-        const res = await apiFetch<PaginatedResponse<Achievement>>(`/public/achievements${query}`);
+        const res = await achievementApi.list(filters);
 
         if (!cancelled) {
           setAchievements(res.data ?? []);
-          setMeta(res.meta ?? null);
+          // Terkadang response dari API menggunakan key 'pagination' alih-alih 'meta'
+          // Kita akan cek keduanya untuk memastikan Pagination tidak gagal dirender.
+          setMeta(res.meta || (res as any).pagination || null);
         }
       } catch (err) {
         if (!cancelled) {
@@ -78,3 +61,4 @@ export function useAchievements(filters: AchievementFilters = {}): UseAchievemen
 
   return { achievements, loading, error, meta, refetch: () => setTrigger(t => t + 1) };
 }
+

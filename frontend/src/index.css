@@ -1,0 +1,12 @@
+/* Sembunyikan scrollbar untuk Chrome, Safari dan Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sembunyikan scrollbar untuk IE, Edge dan Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Global resets atau default styles bisa diletakkan di bawah sini jika diperlukan */

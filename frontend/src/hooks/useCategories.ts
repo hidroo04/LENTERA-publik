@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import apiFetch from '../services/api';
-import type { Category, ApiResponse } from '../types/achievement';
+import { categoryApi } from '../api';
+import type { Category } from '../types';
 
 interface UseCategoriesReturn {
   categories: Category[];
@@ -25,7 +25,7 @@ export function useCategories(): UseCategoriesReturn {
       setError(null);
 
       try {
-        const res = await apiFetch<ApiResponse<Category[]>>('/categories');
+        const res = await categoryApi.list();
 
         if (!cancelled) {
           setCategories(res.data ?? []);
@@ -45,3 +45,4 @@ export function useCategories(): UseCategoriesReturn {
 
   return { categories, loading, error };
 }
+

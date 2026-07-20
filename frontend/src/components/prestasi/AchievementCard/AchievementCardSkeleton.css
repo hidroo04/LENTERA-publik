@@ -1,0 +1,43 @@
+/* =============================================================================
+   AchievementCardSkeleton — Animasi Shimmer Loading
+   ============================================================================= */
+
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.achievement-card-skeleton {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  pointer-events: none;
+}
+
+.acs__img {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.acs__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.acs__line {
+  height: 13px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.acs__line--short  { width: 38%; }
+.acs__line--medium { width: 62%; }
+.acs__line--full   { width: 100%; }

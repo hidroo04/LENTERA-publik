@@ -1,62 +1,100 @@
-import './kontak.css';
-
-// Import Komponen Header dan Footer
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-
-// Import Ikon
-import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaInstagram, FaFacebookF } from 'react-icons/fa';
+import './Kontak.css';
+import { LuMessageCircle, LuMapPin, LuMail, LuPhone, LuInstagram, LuFacebook } from 'react-icons/lu';
 
 const Kontak = () => {
   return (
-    <div className="page-container">
-      <Header />
+    <div className="kontak-page-wrapper">
+      {/* Background elements */}
+      <div className="kontak-bg-dots"></div>
+      <div className="kontak-bg-building"></div>
 
       <main className="kontak-main">
+        {/* Header Section */}
         <div className="kontak-header">
           <h1 className="kontak-title">Kontak</h1>
+          <div className="kontak-underline">
+            <div className="line-green"></div>
+            <div className="line-blue"></div>
+          </div>
+          <p className="kontak-subtitle">
+            Hubungi kami untuk informasi lebih lanjut, kerja sama,<br />
+            atau pertanyaan lainnya.
+          </p>
         </div>
 
-        <div className="kontak-grid">
-          
-          {/* KARTU KIRI (Informasi Kontak) */}
-          <div className="kontak-card card-white">
-            <ul className="kontak-list">
-              <li>
-                <FaMapMarkerAlt className="kontak-icon" />
-                <span>Jl. Merdeka Pendidikan No. 24, Jakarta</span>
-              </li>
-              <li>
-                <FaEnvelope className="kontak-icon" />
-                <span>humas@instansi.go.id</span>
-              </li>
-              <li>
-                <FaPhoneAlt className="kontak-icon" />
-                <span>(021) 7788 1200</span>
-              </li>
-              <li>
-                <FaInstagram className="kontak-icon" />
-                <span>@prestasi.instansi</span>
-              </li>
-              <li>
-                <FaFacebookF className="kontak-icon" />
-                <span>Prestasi Instansi</span>
-              </li>
-            </ul>
-          </div>
+        {/* Card Section */}
+        <div className="kontak-card-container">
+          <div className="kontak-card">
+            
+            {/* Item 1 */}
+            <div className="kontak-item">
+              <div className="kontak-icon-circle">
+                <LuMessageCircle className="kontak-icon" />
+              </div>
+              <div className="kontak-text">
+                <h3 className="kontak-item-title">Informasi Kontak</h3>
+                <p className="kontak-item-desc">Kami siap membantu Anda</p>
+              </div>
+            </div>
 
-          {/* KARTU KANAN (Jam Layanan) */}
-          <div className="kontak-card card-green">
-            <h2 className="layanan-title">Jam Layanan</h2>
-            <p className="layanan-desc">
-              Senin–Jumat, 08.00–16.00 WIB. Pesan publik akan dijawab maksimal 2 hari kerja.
-            </p>
-          </div>
+            {/* Item 2 */}
+            <div className="kontak-item">
+              <div className="kontak-icon-circle">
+                <LuMapPin className="kontak-icon" />
+              </div>
+              <div className="kontak-text">
+                <h3 className="kontak-item-title">Alamat</h3>
+                <p className="kontak-item-desc">Jl. Merdeka Pendidikan No. 24, Jakarta</p>
+              </div>
+            </div>
 
+            {/* Item 3 */}
+            <div className="kontak-item">
+              <div className="kontak-icon-circle">
+                <LuMail className="kontak-icon" />
+              </div>
+              <div className="kontak-text">
+                <h3 className="kontak-item-title">Email</h3>
+                <p className="kontak-item-desc">humas@instansi.go.id</p>
+              </div>
+            </div>
+
+            {/* Item 4 */}
+            <div className="kontak-item">
+              <div className="kontak-icon-circle">
+                <LuPhone className="kontak-icon" />
+              </div>
+              <div className="kontak-text">
+                <h3 className="kontak-item-title">Telepon</h3>
+                <p className="kontak-item-desc">(021) 7788 1200</p>
+              </div>
+            </div>
+
+            {/* Item 5 */}
+            <div className="kontak-item">
+              <div className="kontak-icon-circle">
+                <LuInstagram className="kontak-icon" />
+              </div>
+              <div className="kontak-text">
+                <h3 className="kontak-item-title">Instagram</h3>
+                <p className="kontak-item-desc">@prestasi.instansi</p>
+              </div>
+            </div>
+
+            {/* Item 6 */}
+            <div className="kontak-item">
+              <div className="kontak-icon-circle">
+                <LuFacebook className="kontak-icon" />
+              </div>
+              <div className="kontak-text">
+                <h3 className="kontak-item-title">Facebook</h3>
+                <p className="kontak-item-desc">Prestasi Instansi</p>
+              </div>
+            </div>
+
+          </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };

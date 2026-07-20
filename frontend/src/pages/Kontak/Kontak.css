@@ -1,135 +1,179 @@
 /* =========================================
    LAYOUT UTAMA HALAMAN KONTAK
    ========================================= */
-.page-container {
+.kontak-page-wrapper {
+  position: relative;
   width: 100%;
-  min-height: 100vh;
-  background-color: #FAF9F6;
-  background-image: radial-gradient(circle at top right, rgba(194, 136, 58, 0.05) 0%, transparent 40%),
-                    radial-gradient(circle at top left, rgba(0, 51, 102, 0.03) 0%, transparent 40%);
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef2f5 100%);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
+/* =========================================
+   BACKGROUND ELEMENTS (DEKORASI)
+   ========================================= */
+.kontak-bg-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background-image: radial-gradient(#d1d5db 2px, transparent 2px);
+  background-size: 20px 20px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.kontak-bg-building {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background-image: radial-gradient(circle at center, rgba(255,255,255,0) 0%, #eef2f5 70%),
+                    repeating-linear-gradient(45deg, rgba(0,51,102,0.02) 0px, rgba(0,51,102,0.02) 20px, transparent 20px, transparent 40px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
 .kontak-main {
-  flex: 1;
-  max-width: 1100px; /* Dibuat sedikit lebih sempit agar kartu tidak terlalu melebar */
-  margin: 0 auto;
-  padding: 4rem 5%;
+  position: relative;
   width: 100%;
+  max-width: 900px;
+  padding: 4rem 2rem;
+  z-index: 1;
 }
 
+/* =========================================
+   HEADER SECTION
+   ========================================= */
 .kontak-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .kontak-title {
   font-family: 'Playfair Display', serif;
-  font-size: 3.2rem;
+  font-size: 3rem;
   color: #002244;
-  margin: 0;
-  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
 }
 
-/* =========================================
-   SISTEM GRID (Dua Kolom)
-   ========================================= */
-.kontak-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: stretch; /* Memastikan kedua kartu punya tinggi yang sama */
-}
-
-/* =========================================
-   KARTU KONTAK (Base)
-   ========================================= */
-.kontak-card {
-  border-radius: 20px;
-  padding: 3rem 2.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.kontak-card:hover {
-  transform: translateY(-5px);
-}
-
-/* =========================================
-   KARTU PUTIH (Sebelah Kiri)
-   ========================================= */
-.card-white {
-  background: #ffffff;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.02);
-}
-
-.kontak-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.kontak-underline {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem; /* Jarak antar baris kontak */
+  gap: 4px;
+  margin-bottom: 1.5rem;
 }
 
-.kontak-list li {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: 15px;
-  color: #333;
+.line-green {
+  width: 20px;
+  height: 4px;
+  background-color: #7ab55c;
+  border-radius: 2px;
 }
 
-.kontak-icon {
-  font-size: 18px;
-  color: #002244;
-  min-width: 24px; /* Menjaga agar ikon rata sejajar ke bawah */
-  text-align: center;
+.line-blue {
+  width: 30px;
+  height: 4px;
+  background-color: #003366;
+  border-radius: 2px;
 }
 
-/* =========================================
-   KARTU HIJAU (Sebelah Kanan)
-   ========================================= */
-.card-green {
-  background: #61956e; /* Warna hijau khas seperti di gambar */
-  box-shadow: 0 4px 25px rgba(97, 149, 110, 0.2);
-  display: flex;
-  flex-direction: column;
-}
-
-.layanan-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  color: #002244;
-  margin: 0 0 1rem 0;
-  font-weight: 500;
-}
-
-.layanan-desc {
-  font-size: 15px;
-  color: #1a2f3a; /* Warna teks gelap yang mudah dibaca di atas hijau */
+.kontak-subtitle {
+  font-size: 1.1rem;
+  color: #4b5563;
   line-height: 1.6;
   margin: 0;
 }
 
 /* =========================================
-   RESPONSIVE DESIGN (HP & Tablet)
+   CARD SECTION
+   ========================================= */
+.kontak-card-container {
+  width: 100%;
+}
+
+.kontak-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 34, 68, 0.06);
+  padding: 1rem 3rem;
+}
+
+/* =========================================
+   LIST ITEMS
+   ========================================= */
+.kontak-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.kontak-item:last-child {
+  border-bottom: none;
+}
+
+.kontak-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #e6f0fa;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kontak-icon {
+  font-size: 20px;
+  color: #003366;
+}
+
+.kontak-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.kontak-item-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.kontak-item-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
    ========================================= */
 @media (max-width: 768px) {
-  .kontak-main {
-    padding: 3rem 5%;
+  .kontak-card {
+    padding: 1rem 1.5rem;
   }
-
+  
   .kontak-title {
     font-size: 2.5rem;
   }
-
-  .kontak-grid {
-    grid-template-columns: 1fr; /* Berubah menjadi 1 kolom menyusun atas-bawah */
-    gap: 1.5rem;
+  
+  .kontak-icon-circle {
+    width: 40px;
+    height: 40px;
   }
   
-  .kontak-card {
-    padding: 2rem;
+  .kontak-icon {
+    font-size: 18px;
   }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import apiFetch from '../services/api';
-import type { Achievement, ApiResponse } from '../types/achievement';
+import { achievementApi } from '../api';
+import type { Achievement } from '../types';
 
 interface UseFeaturedReturn {
   featured: Achievement[];
@@ -25,7 +25,7 @@ export function useFeaturedAchievements(): UseFeaturedReturn {
       setError(null);
 
       try {
-        const res = await apiFetch<ApiResponse<Achievement[]>>('/achievements/featured');
+        const res = await achievementApi.featured();
 
         if (!cancelled) {
           setFeatured(res.data ?? []);
@@ -45,3 +45,4 @@ export function useFeaturedAchievements(): UseFeaturedReturn {
 
   return { featured, loading, error };
 }
+
