@@ -2,15 +2,13 @@ import { Link } from 'react-router-dom';
 import './Beranda.css';
 
 // Import Icon
-import { FaSearch, FaTrophy, FaThLarge, FaMedal, FaArrowRight, FaStar } from 'react-icons/fa';
+import { FaTrophy, FaThLarge, FaMedal, FaArrowRight, FaStar } from 'react-icons/fa';
 
 // Import Hooks API
 import { useAchievements } from '../../hooks/useAchievements';
 import { useStatistics } from '../../hooks/useStatistics';
 
 // Import Utils & Constants
-import { formatDate, levelBadgeClass } from '../../utils';
-import { STORAGE_URL, FALLBACK_IMAGE } from '../../constants';
 
 import BpsBg from '../../assets/bps.jpg';
 import LatestAchievements from "../../features/home/components/LatestAchievements";

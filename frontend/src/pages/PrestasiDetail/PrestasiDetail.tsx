@@ -13,7 +13,6 @@ const PrestasiDetail = () => {
 
   return (
     <div className="detail-container">
-
       <main className="detail-main">
         {/* Breadcrumb */}
         <nav className="detail-breadcrumb">
@@ -106,17 +105,17 @@ const PrestasiDetail = () => {
               <div className="detail-body">
                 {achievement.description
                   ? achievement.description.split('\n').map((para, i) =>
-                      para.trim() ? <p key={i}>{para}</p> : null
-                    )
+                    para.trim() ? <p key={i}>{para}</p> : null
+                  )
                   : <p style={{ color: '#999' }}>Deskripsi belum tersedia.</p>
                 }
               </div>
-              
+
               {achievement.attachment_url && (
                 <div style={{ marginTop: '2rem' }}>
-                    <a href={achievement.attachment_url} target="_blank" rel="noreferrer" className="back-btn" style={{ background: '#2563eb', color: 'white', display: 'inline-flex', padding: '10px 16px', borderRadius: '8px', textDecoration: 'none', fontWeight: 500 }}>
-                        Lihat Dokumen / Sertifikat
-                    </a>
+                  <a href={achievement.attachment_url} target="_blank" rel="noreferrer" className="back-btn" style={{ background: '#2563eb', color: 'white', display: 'inline-flex', padding: '10px 16px', borderRadius: '8px', textDecoration: 'none', fontWeight: 500 }}>
+                    Lihat Dokumen / Sertifikat
+                  </a>
                 </div>
               )}
             </div>

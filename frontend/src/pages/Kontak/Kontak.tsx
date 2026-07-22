@@ -1,12 +1,14 @@
 import './Kontak.css';
 import { LuMessageCircle, LuMapPin, LuMail, LuPhone, LuInstagram, LuFacebook } from 'react-icons/lu';
+import bgImage from '../../assets/bps.jpg';
 
 const Kontak = () => {
   return (
     <div className="kontak-page-wrapper">
       {/* Background elements */}
+      <div className="kontak-bg-image" style={{ backgroundImage: `url(${bgImage})` }}></div>
+      <div className="kontak-bg-overlay"></div>
       <div className="kontak-bg-dots"></div>
-      <div className="kontak-bg-building"></div>
 
       <main className="kontak-main">
         {/* Header Section */}

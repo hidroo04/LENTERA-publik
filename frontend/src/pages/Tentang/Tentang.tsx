@@ -1,4 +1,4 @@
-import './tentang.css';
+import './Tentang.css';
 import bgImage from '../../assets/bps.jpg';
 
 const Tentang = () => {
