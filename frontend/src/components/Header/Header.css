@@ -10,7 +10,8 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
-  z-index: 2000; /* dinaikkan dari 100 agar .header-nav (di dalam header) tidak tertutup .mobile-overlay (z-index 998) */
+  z-index: 2000;
+  /* dinaikkan dari 100 agar .header-nav (di dalam header) tidak tertutup .mobile-overlay (z-index 998) */
 }
 
 .header-brand {
@@ -25,7 +26,7 @@
 }
 
 .brand-logo {
-  height: 60px;
+  height: 45px;
   object-fit: contain;
 }
 
@@ -221,9 +222,14 @@
    RESPONSIF MOBILE
    ========================================= */
 @media (max-width: 768px) {
-  .header-right { gap: 10px; }
-  .desktop-search { display: none; }
-  
+  .header-right {
+    gap: 10px;
+  }
+
+  .desktop-search {
+    display: none;
+  }
+
   .mobile-search-toggle {
     display: flex;
     align-items: center;
@@ -241,9 +247,9 @@
   .mobile-overlay {
     display: block;
     position: fixed;
-    top: 0; 
+    top: 0;
     left: 0;
-    width: 100vw; 
+    width: 100vw;
     height: 100vh;
     background: transparent;
     z-index: 998;
@@ -265,7 +271,7 @@
     opacity: 1;
     white-space: normal;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 9999; 
+    z-index: 9999;
   }
 
   .header-nav.open {
@@ -294,12 +300,18 @@
     font-size: 15px;
     display: block;
     position: relative;
-    z-index: 10001; 
+    z-index: 10001;
     text-decoration: none;
   }
-  
-  .header-nav a::after { display: none; }
-  .header-nav a.active { color: #f97316; font-weight: 700; }
+
+  .header-nav a::after {
+    display: none;
+  }
+
+  .header-nav a.active {
+    color: #f97316;
+    font-weight: 700;
+  }
 
   /* Dropdown Pencarian */
   .mobile-search-dropdown {
@@ -317,7 +329,9 @@
     z-index: 99;
   }
 
-  .mobile-search-dropdown.open { height: 70px; }
+  .mobile-search-dropdown.open {
+    height: 70px;
+  }
 
   .mobile-search-container {
     display: flex;
@@ -346,7 +360,15 @@
 }
 
 @media (max-width: 480px) {
-  .brand-text h1 { font-size: 13px; }
-  .btn-kategori { padding: 0 12px; }
-  .btn-kategori span { display: none; }
+  .brand-text h1 {
+    font-size: 13px;
+  }
+
+  .btn-kategori {
+    padding: 0 12px;
+  }
+
+  .btn-kategori span {
+    display: none;
+  }
 }
