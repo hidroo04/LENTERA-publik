@@ -95,7 +95,22 @@ Semua interaksi request ke server dipusatkan pada folder `src/api/` (contoh: `ac
 Aplikasi mengambil konfigurasi Base URL otomatis dari file `.env`.
 
 ## Screenshot
-*(Tambahkan gambar screenshot aplikasi publik Anda di dalam folder aset, lalu gunakan link di bawah ini)*
+### Beranda
+<img width="2880" height="1534" alt="image" src="https://github.com/user-attachments/assets/02688c3a-87b6-4b2a-8e92-ce0ba528fc38" />
+<img width="2880" height="1532" alt="image" src="https://github.com/user-attachments/assets/2a1301f3-d8dd-4fff-b34c-d5a19fe45da6" />
 
-![Screenshot Beranda LENTERA Publik](./src/assets/screenshot-home.png)
-*Tampilan Halaman Beranda Publik LENTERA*
+### Prestasi
+<img width="2880" height="1524" alt="image" src="https://github.com/user-attachments/assets/6798964f-c15e-4d2b-9a63-82332588e4e8" />
+
+### Statistik
+<img width="2880" height="1522" alt="image" src="https://github.com/user-attachments/assets/82664f82-fdb4-4f01-b404-060b536b4482" />
+
+### Tentang
+<img width="2880" height="1528" alt="image" src="https://github.com/user-attachments/assets/0a6cc47a-de7d-4965-8991-9d5472507280" />
+
+
+### Kontak
+<img width="2868" height="1528" alt="image" src="https://github.com/user-attachments/assets/c85e9441-c767-46ec-a639-796d70f5f012" />
+
+
+
